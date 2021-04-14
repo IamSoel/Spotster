@@ -19,6 +19,10 @@ class LoginBloc extends Object with Validators {
   Stream<bool> get submitValid =>
       Rx.combineLatest2(email, password, (a, b) => true);
 
+// passing the final value of email and password to loginscreen
+  String get finalEmail => _email.value;
+  String get finalPassword => _password.value;
+
   void submit() {
     final finalEmail = _email.value;
     final finalPassword = _password.value;
