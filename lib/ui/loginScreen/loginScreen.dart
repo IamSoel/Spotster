@@ -14,8 +14,14 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _value = false;
   bool obscurePassword = true;
 
-  final authBloc = AuthenticationBloc(repository: Repository());
+  AuthenticationBloc authBloc;
   final sharedPref = SharedPref();
+
+  @override
+  void initState() {
+    authBloc = AuthenticationBloc(repository: Repository());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

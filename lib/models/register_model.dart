@@ -6,7 +6,7 @@ class RegisterModel {
   final String _contact;
   final String _gender;
   final String _birthDate;
-
+  
   RegisterModel(this._firstName, this._lastName, this._password, this._email,
       this._contact, this._birthDate, this._gender);
 

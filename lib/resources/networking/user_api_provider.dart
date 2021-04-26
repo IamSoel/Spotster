@@ -27,15 +27,18 @@ class UserApiProvider {
 
   Future<LoginModel> postLoginData<T>(ApiService resource) async {
     Map<String, String> header = {
-      'Content-Type': 'application/json; charset=UTF-8',
+      'Content-Type': 'multipart/form-data',
     };
-    final response = await http.post(Uri.http(baseUrl, resource.url),
-        body: resource.body, headers: header);
+    final response = await http.post(
+        Uri.http('192.168.1.76:8000/api/', resource.url, {'q': '{http}'}),
+        body: resource.body);
     if (response.statusCode == 200) {
       Map<String, String> responseData = json.decode(response.body);
+      print('Successs');
 
       return LoginModel.fromJson(responseData);
     } else {
+      print('Error' + response.statusCode.toString());
       throw Exception(response.statusCode);
     }
   }

@@ -7,7 +7,6 @@ import 'package:sportster/resources/repository/repository.dart';
 
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
-
   final Repository repository;
 
   AuthenticationBloc({@required this.repository})
@@ -38,13 +37,15 @@ class AuthenticationBloc
           'email': event.email,
           'password': event.password,
         };
-        var url = '/userlogin/'; //+ event.email.trim() + event.password.trim();
+        var url =
+            'userlogin/'; //+ event.email.trim() + event.password.trim();
 
         final data = await UserApiProvider()
-            .getLoginData(repository.getLogin(url, jsonBody));
-
+            .postLoginData(repository.getLogin(url, jsonBody));
+        print(data);
         yield AuthenticationState(loginModel: data);
       } catch (e) {
+        print('Error : ' + e.toString());
         yield GetFailureState(error: e.toString());
       }
     } else if (event is CheckLoginEvent) {
